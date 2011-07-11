@@ -11,8 +11,12 @@ class FbPagesController < ApplicationController
     "client_id=#{FB_APP_ID}&redirect_uri=#{url}&" + 
     "client_secret=#{FB_APP_SECRET}&code=#{params[:code]}")
     
-    response = Net::HTTP.get_response(u)
-    logger.info response.body
+    #response = Net::HTTP.get_response(u)
+    #logger.info response.body
+
+    redirect_to u.to_s
+
+
   end
   
   # GET /fb_pages

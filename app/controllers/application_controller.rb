@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     fb_auth_response_url = url_for({:host => request.host, :controller => 'fb_pages', 
                                     :action => 'fb_auth_response', :id => fb_page.id})
     "https://www.facebook.com/dialog/oauth?client_id=#{FB_APP_ID}&redirect_uri=#{fb_auth_response_url}" + 
-    "&scope=offline_access,publish_stream"
+    "&scope=offline_access,publish_stream,read_stream,email"
   end
   helper_method :fb_oauth_url
 end
