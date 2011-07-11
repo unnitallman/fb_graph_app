@@ -15,7 +15,13 @@
     <td><%= link_to 'Show', fb_page %></td>
     <td><%= link_to 'Edit', edit_fb_page_path(fb_page) %></td>
     <td><%= link_to 'Destroy', fb_page, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td> <%= link_to 'Get access token', fb_oauth_url %> </td>
+    <td>
+      <% unless fb_page.authorized? %> 
+        <%= link_to 'Get access token', fb_oauth_url(fb_page) %> 
+      <% else %>
+        <b>Authtoken acquired</b> 
+      <% end %>  
+    </td>
   </tr>
 <% end %>
 </table>
