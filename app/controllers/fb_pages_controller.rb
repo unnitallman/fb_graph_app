@@ -5,13 +5,14 @@ class FbPagesController < ApplicationController
     
     url = url_for({:host => request.host, :controller => 'fb_pages', 
                    :action => 'fb_auth_response', :id => @fb_page.id})
+                   
  
-    u = "https://graph.facebook.com/oauth/access_token?" + 
+    u = URI.parse("https://graph.facebook.com/oauth/access_token?" + 
     "client_id=#{FB_APP_ID}&redirect_uri=#{url}&" + 
-    "client_secret=#{FB_APP_SECRET}&code=#{params[:code]}"
-
-
-    redirect_to u
+    "client_secret=#{FB_APP_SECRET}&code=#{params[:code]}")
+    
+    response = Net::HTTP.get_response(u)
+    logger.info response.body
   end
   
   # GET /fb_pages
