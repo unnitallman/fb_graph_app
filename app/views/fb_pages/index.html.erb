@@ -19,7 +19,7 @@
       <% unless fb_page.authorized? %> 
         <%= link_to 'Get access token', fb_oauth_url(fb_page) %> 
       <% else %>
-        <b>Authtoken acquired</b> 
+        <b>Access token acquired</b> 
       <% end %>  
     </td>
   </tr>

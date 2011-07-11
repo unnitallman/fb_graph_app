@@ -1,5 +1,5 @@
 class FbPage < ActiveRecord::Base
   def authorized?
-    !auth_token.nil?
+    !access_token.nil?
   end
 end

@@ -1,8 +1,8 @@
 class FbPagesController < ApplicationController
   def fb_auth_response
     @fb_page = FbPage.find(params[:id])
-    @fb_page.update_attribute(:auth_token, params[:code])
-    redirect_to :index
+    @fb_page.update_attribute(:access_token, params[:code])
+    redirect_to :action => 'index'
   end
   
   # GET /fb_pages
