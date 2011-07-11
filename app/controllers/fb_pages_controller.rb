@@ -1,7 +1,8 @@
+require 'net/https'
+
 class FbPagesController < ApplicationController
   def fb_auth_response
     @fb_page = FbPage.find(params[:id])
-    #@fb_page.update_attribute(:access_token, params[:code])
     
     url = url_for({:host => request.host, :controller => 'fb_pages', 
                    :action => 'fb_auth_response', :id => @fb_page.id})
@@ -11,13 +12,14 @@ class FbPagesController < ApplicationController
     "client_id=#{FB_APP_ID}&redirect_uri=#{url}&" + 
     "client_secret=#{FB_APP_SECRET}&code=#{params[:code]}")
     
-    #response = Net::HTTP.get_response(u)
-    #logger.info response.body
-
-    redirect_to u.to_s
-
-
-  end
+    begin
+      access_token = open(u).read.split("access_token=")[-1]
+      @fb_page.update_attribute(:access_token, access_token)  
+    rescue
+      logger.inspect "Authentication Error !"
+    end
+    redirect_to :action => :index
+end
   
   # GET /fb_pages
   # GET /fb_pages.xml
