@@ -1,0 +1,28 @@
+<%= form_for(@fb_page) do |f| %>
+  <% if @fb_page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fb_page.errors.count, "error") %> prohibited this fb_page from being saved:</h2>
+
+      <ul>
+      <% @fb_page.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="fields">
+    <%= f.label :name %>
+    <p><%= f.text_field :name %></p>
+    
+    <br/>
+    
+    <%= f.label :url %>
+    <p><%= f.text_field :url %></p>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
