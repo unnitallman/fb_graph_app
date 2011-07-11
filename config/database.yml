@@ -8,3 +8,11 @@ development:
   user: root
   password:
 
+staging:
+  adapter: mysql
+  database: fb_graph_api
+  pool: 5
+  timeout: 5000
+  user: root
+  password: root@2008
+
