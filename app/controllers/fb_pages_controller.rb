@@ -1,8 +1,17 @@
 class FbPagesController < ApplicationController
   def fb_auth_response
     @fb_page = FbPage.find(params[:id])
-    @fb_page.update_attribute(:access_token, params[:code])
-    redirect_to :action => 'index'
+    #@fb_page.update_attribute(:access_token, params[:code])
+    
+    url = url_for(:host => request.host, :controller => :fb_pages, 
+                  :action => :fb_auth_access_token_response, :id => @fb_page.id)
+    
+    u = "https://graph.facebook.com/oauth/access_token?" + 
+    "client_id=#{FB_APP_ID}&redirect_uri=#{url}&" + 
+    "client_secret=#{FB_APP_SECRET}&code=#{params[:code]}"
+    
+    res = NetHttp::request(u)
+    
   end
   
   # GET /fb_pages
