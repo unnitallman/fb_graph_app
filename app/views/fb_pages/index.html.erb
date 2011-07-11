@@ -15,7 +15,7 @@
     <td><%= link_to 'Show', fb_page %></td>
     <td><%= link_to 'Edit', edit_fb_page_path(fb_page) %></td>
     <td><%= link_to 'Destroy', fb_page, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td> <%= link_to 'Get access token','' %> </td>
+    <td> <%= link_to 'Get access token', fb_oauth_url %> </td>
   </tr>
 <% end %>
 </table>
